@@ -38,17 +38,38 @@ class Vampire {
 
   // Returns the vampire object with that name, or null if no vampire exists with that name
   vampireWithName(name) {
-    
+    let vampsWithnames = [];
+
+    if(this.name != null){
+      vampsWithnames.push(this)
+    }
+    for (const offspring of this.offspring){
+      const offspringWithnames = offspring.vampireWithName(name);
+      vampsWithnames = name.concat(offspringWithnames);
+    }
   }
 
   // Returns the total number of vampires that exist
   get totalDescendents() {
-    
+    let totalEmployees = 0
+
+    console.log(this);
+    for (const childNode of this.offspring){
+      childNode.depthFirstTraversal();
+    }
+
+    return totalEmployees
   }
 
   // Returns an array of all the vampires that were converted after 1980
   get allMillennialVampires() {
-    
+    let oldvamps = [];
+    for(const yearConverted of this.yearConverted){
+      if (this.yearConverted > 1980){
+        oldvamps.push(this)
+      }
+    }
+    return oldvamps;
   }
 
   /** Stretch **/
